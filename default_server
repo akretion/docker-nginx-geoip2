@@ -1,0 +1,13 @@
+server {
+    listen 80 default_server;
+    server_name _; # catchall
+
+    location / {
+        add_header GEOIP_COUNTRY_CODE $geoip2_data_country_code;
+        add_header GEOIP_COUNTRY_NAME $geoip2_data_country_name;
+
+        default_type application/json;
+        return 200 '{"GEOIP_COUNTRY_CODE": "$geoip2_data_country_code","GEOIP_COUNTRY_NAME": "$geoip2_data_country_name"}';
+    }
+}
+

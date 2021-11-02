@@ -1,0 +1,2 @@
+# At 10:05 on Wednesday.
+5 10 * * 3 geoipupdate >> /dev/null 2>&1
