@@ -19,7 +19,10 @@ ADD ./default_server /etc/nginx/sites-enabled/default
 RUN sed -i "s/YOUR_ACCOUNT_ID_HERE/$MAXMIND_ACCOUNT_ID/g" /etc/GeoIP.conf
 RUN sed -i "s/YOUR_LICENSE_KEY_HERE/$MAXMIND_LICENSE_KEY/g" /etc/GeoIP.conf
 RUN geoipupdate
+
+# Setup cron for GeoIP update
 COPY /geoipupdate /etc/cron.d/geoipupdate
+RUN chmod 0644 /etc/cron.d/geoipupdate && crontab /etc/cron.d/geoipupdate
 
 # Run nginx
 EXPOSE 80/tcp
